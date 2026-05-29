@@ -487,6 +487,135 @@
     </style>
 </head>
 <body>
+    
+    <!--loadindd-->
+
+
+     <!--loadingggggggg-->
+
+    <div class="oj-standalone-screen-loader" id="ojSkeletonPanel">
+    <div class="oj-standalone-sk-container">
+        <div class="oj-standalone-sk-row">
+            <div class="oj-standalone-sk-left">
+                <div class="oj-standalone-sk-item oj-sk-badge shimmer-fx"></div>
+                <div class="oj-standalone-sk-item oj-sk-h1 shimmer-fx"></div>
+                <div class="oj-standalone-sk-item oj-sk-h2 shimmer-fx"></div>
+                <div class="oj-standalone-sk-item oj-sk-p1 shimmer-fx"></div>
+                <div class="oj-standalone-sk-item oj-sk-p2 shimmer-fx"></div>
+                <div class="oj-standalone-sk-tags">
+                    <div class="oj-standalone-sk-item oj-sk-tag shimmer-fx"></div>
+                    <div class="oj-standalone-sk-item oj-sk-tag shimmer-fx"></div>
+                    <div class="oj-standalone-sk-item oj-sk-tag shimmer-fx"></div>
+                </div>
+                <div class="oj-standalone-sk-item oj-sk-btn shimmer-fx"></div>
+            </div>
+            <div class="oj-standalone-sk-right">
+                <div class="oj-standalone-sk-item oj-sk-avatar shimmer-fx"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .oj-standalone-screen-loader {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #f8fafd !important;
+        z-index: 99999999 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out !important;
+    }
+
+    .oj-standalone-sk-container {
+        width: 100% !important;
+        max-width: 1240px !important;
+        padding: 0 2rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .oj-standalone-sk-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 60px !important;
+    }
+
+    .oj-standalone-sk-left { flex: 1.2 !important; }
+    .oj-standalone-sk-right { flex: 0.8 !important; display: flex !important; justify-content: center !important; }
+
+    .shimmer-fx {
+        background: linear-gradient(90deg, #eef2f7 25%, #e2e8f0 50%, #eef2f7 75%) !important;
+        background-size: 200% 100% !important;
+        animation: ojStandaloneShm 1.5s infinite linear !important;
+    }
+
+    @keyframes ojStandaloneShm { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .oj-sk-badge { width: 160px !important; height: 26px !important; border-radius: 4px !important; margin-bottom: 20px !important; }
+    .oj-sk-h1 { height: 48px !important; border-radius: 6px !important; margin-bottom: 12px !important; width: 80% !important; }
+    .oj-sk-h2 { height: 48px !important; border-radius: 6px !important; margin-bottom: 20px !important; width: 55% !important; }
+    .oj-sk-p1 { height: 14px !important; border-radius: 4px !important; margin-top: 20px !important; margin-bottom: 8px !important; width: 90% !important; }
+    .oj-sk-p2 { height: 14px !important; border-radius: 4px !important; margin-bottom: 20px !important; width: 70% !important; }
+    .oj-standalone-sk-tags { display: flex !important; gap: 8px !important; margin: 24px 0 !important; }
+    .oj-sk-tag { width: 85px !important; height: 28px !important; border-radius: 15px !important; }
+    .oj-sk-btn { width: 200px !important; height: 50px !important; border-radius: 30px !important; }
+    .oj-sk-avatar { width: 320px !important; height: 320px !important; border-radius: 8px !important; }
+
+    @media (max-width: 768px) {
+        .oj-standalone-sk-row {
+            flex-direction: column-reverse !important;
+            text-align: center !important;
+            gap: 40px !important;
+        }
+
+        .oj-standalone-sk-left, .oj-standalone-sk-right {
+            flex: none !important;
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .oj-sk-h1, .oj-sk-h2 { margin: 10px auto !important; }
+        .oj-sk-h1 { width: 85% !important; }
+        .oj-sk-h2 { width: 65% !important; }
+        .oj-standalone-sk-tags { justify-content: center !important; }
+        .oj-sk-avatar { max-width: 240px !important; height: 240px !important; }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const mainLoader = document.getElementById('ojSkeletonPanel');
+    const targetImg = document.getElementById('ojHeroPhotoNode');
+
+    const hideLoader = () => {
+        if (mainLoader) {
+            mainLoader.style.opacity = '0';
+            setTimeout(() => { 
+                mainLoader.style.display = 'none'; 
+                mainLoader.style.visibility = 'hidden';
+            }, 500);
+        }
+    };
+
+    if (targetImg && targetImg.complete) {
+        hideLoader();
+    } else if (targetImg) {
+        targetImg.addEventListener('load', hideLoader);
+        targetImg.addEventListener('error', hideLoader);
+    } else {
+        setTimeout(hideLoader, 1500);
+    }
+});
+</script>
 <!--mouseeeeeeeee-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -605,105 +734,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    <!--herooooooooooo-->
-<div class="cyber-liquid-mobile-cluster" style="font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box;">
     
-    <div style="display: flex; gap: 10px; width: 100%; align-items: stretch; margin-top: 20px;">
-        
-        <div style="flex: 1; background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(255,255,255,0.3)); border: 1px solid rgba(14, 165, 233, 0.3); padding: 14px 12px; border-radius: 42% 58% 40% 60% / 55% 42% 58% 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: microFluidMorph 6s infinite ease-in-out; box-shadow: 0 8px 20px rgba(14, 165, 233, 0.08);">
-            <span style="font-size: 0.55rem; font-weight: 800; color: #0ea5e9; letter-spacing: 0.5px; text-transform: uppercase;">Seniority</span>
-            <span style="font-size: 0.82rem; font-weight: 900; color: #111111; letter-spacing: -0.2px; white-space: nowrap;">3+ YRS EXP</span>
-        </div>
+<div class="matte-noise"></div>
+<div class="ambient-mesh">
+    <div class="mesh-blob blob-sky"></div>
+    <div class="mesh-blob blob-peach"></div>
+</div>
 
-        <div style="flex: 1.1; background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(253, 186, 116, 0.1)); border: 1px solid rgba(255,255,255,0.6); padding: 12px; border-radius: 55% 45% 52% 48% / 48% 52% 45% 55%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: microFluidMorph 7s infinite ease-in-out 1s; box-shadow: 0 8px 20px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.5);">
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <span class="cyber-pulse-dot" style="width: 6px; height: 6px; background: #25D366; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #25D366; animation: cyberBlink 2s infinite ease-in-out;"></span>
-                <span style="font-size: 0.62rem; font-weight: 900; color: #111111; letter-spacing: 0.5px; text-transform: uppercase;">ACTIVE NOW</span>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">OMAAN<span>.</span></div>
+        <div class="nav-links" style="display: flex; align-items: center; gap: 1.2rem; font-family: 'Plus Jakarta Sans', sans-serif;">
+            <div class="nav-metric-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); padding: 5px 12px; border-radius: 0px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);">
+                <span style="font-size: 0.72rem; font-weight: 900; color: #0ea5e9; letter-spacing: 0.5px;">3+ YEARS OF EXPERIENCE</span>
             </div>
-            <span style="font-size: 0.72rem; font-weight: 700; color: #111111; opacity: 0.6;">Remote / Global</span>
+
+            <div class="status-badge-desktop" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); padding: 5px 12px; border-radius: 0px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);">
+                <span class="pulse-dot" style="width: 7px; height: 7px; background: #25D366; display: inline-block; box-shadow: 0 0 10px #25D366; animation: statusBlink 2s infinite ease-in-out;"></span>
+                <span style="font-size: 0.68rem; font-weight: 800; color: #111111; letter-spacing: 0.3px; text-transform: uppercase;">Active / Remote</span>
+            </div>
         </div>
-
+        <div class="liquid-border-container">
+            <a href="#CTA" style="text-decoration: none;"> <button class="btn-premium">Hire Me ?</button></a>
+        </div>
     </div>
-
-    
-
-</div>
-
-<style>
-    .cyber-liquid-mobile-cluster {
-        display: none; /* Desktop protection layer */
-        box-sizing: border-box;
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto 2.2rem auto; /* Perfect layout clearance above headers */
-        
-        /* Flex Engine Structure */
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-    }
-
-    /* CONTINUOUS ORGANIC SHAPE DEFORMATION ANIMATION (The Liquid Look) */
-    @keyframes microFluidMorph {
-        0%, 100% {
-            border-radius: 42% 58% 40% 60% / 55% 42% 58% 45%;
-        }
-        50% {
-            border-radius: 50% 50% 55% 45% / 45% 55% 40% 60%;
-        }
-    }
-
-    @keyframes cyberBlink {
-        0%, 100% { opacity: 0.35; transform: scale(0.9); }
-        50% { opacity: 1; transform: scale(1.1); }
-    }
-
-    /* RESPONSIVE HARDWARE ENTRY POINT */
-    @media (max-width: 768px) {
-        .cyber-liquid-mobile-cluster {
-            display: flex !important; /* Only triggers on smart screens */
-        }
-    }
-</style>
-
-<script>
-(function() {
-    function updateCyberClock() {
-        const cyberClockEl = document.getElementById('cyber-matrix-clock');
-        if (!cyberClockEl) return;
-        const now = new Date();
-        cyberClockEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-    }
-    setInterval(updateCyberClock, 60000);
-    setTimeout(updateCyberClock, 10);
-})();
-</script>
-    <div class="matte-noise"></div>
-    <div class="ambient-mesh">
-        <div class="mesh-blob blob-sky"></div>
-        <div class="mesh-blob blob-peach"></div>
-    </div>
-
-    <nav class="navbar desktop-only-element">
-        <div class="nav-container">
-            <div class="logo">OMAAN<span>.</span></div>
-              <div class="nav-links" style="display: flex; align-items: center; gap: 1.2rem; font-family: 'Plus Jakarta Sans', sans-serif;">
-    
-    <div class="nav-metric-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); padding: 5px 12px; border-radius: 30px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);">
-        <span style="font-size: 0.72rem; font-weight: 900; color: #0ea5e9; letter-spacing: 0.5px;">3+ YEARS OF EXPERIENCE</span>
-    </div>
-
-    <div class="status-badge-desktop" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); padding: 5px 12px; border-radius: 30px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);">
-        <span class="pulse-dot" style="width: 7px; height: 7px; background: #25D366; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #25D366; animation: statusBlink 2s infinite ease-in-out;"></span>
-        <span style="font-size: 0.68rem; font-weight: 800; color: #111111; letter-spacing: 0.3px; text-transform: uppercase;">Active / Remote</span>
-    </div>
-
-    <!--
-    <div class="geo-matrix-desktop" style="font-size: 0.75rem; font-weight: 700; color: #111111; opacity: 0.8; letter-spacing: -0.2px; white-space: nowrap;">
-        Global <span style="opacity: 0.3; margin: 0 2px;">//</span> <span id="nav-live-clock">11:17 AM</span>
-    </div>-->
-
-</div>
+</nav>
 
 <style>
     @keyframes statusBlink {
@@ -711,82 +766,99 @@ document.addEventListener('DOMContentLoaded', () => {
         50% { opacity: 1; transform: scale(1.1); }
     }
     
-    /* Responsive Optimization: Mobile screen par overlap crash rokne k liye automatic hide rule */
     @media (max-width: 768px) {
         .nav-metric-badge,
         .status-badge-desktop,
         .geo-matrix-desktop {
             display: none !important;
         }
+        /* Mobile Navbar Layout Fixed */
+        .navbar {
+            padding: 15px 20px !important;
+            position: relative !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            background: transparent !important;
+        }
+        .nav-container {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+        .navbar .liquid-border-container {
+            display: block !important;
+            margin: 0 !important;
+        }
+        .btn-premium {
+            padding: 8px 18px !important;
+            font-size: 0.8rem !important;
+        }
     }
 </style>
 
-<script>
-(function() {
-    function updateNavClock() {
-        const clockEl = document.getElementById('nav-live-clock');
-        if (!clockEl) return;
-        const now = new Date();
-        clockEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-    }
-    // Safe initialization with interval execution loops
-    setInterval(updateNavClock, 60000);
-    setTimeout(updateNavClock, 10);
-})();
-</script>
-            <div class="liquid-border-container">
-                <a href="#CTA" style="text-decoration: none;"> <button class="btn-premium">Hire Me ?</button></a>
+<section class="hero-section">
+    <div class="hero-grid">
+        
+        <div class="hero-left">
+            <div class="mini-badge">Full-Stack Architecture</div>
+            <h1 class="main-title-block">
+                I'm Omaan Jallane<br>
+                <span class="typewriter-rigid-box">
+                    <strong style="color: black;">Build</strong>
+                    <span class="typewriter-inner" id="typewriter-target"></span>
+                </span>
+            </h1>
+            
+            <p class="hero-description">
+                I create <span>fast, secure full-stack websites</span> and powerful web applications from scratch.
+            </p>
+
+            <div class="stack-row-wrapper">
+                <h3 class="stack-row-title">Core Weaponry</h3>
+                <div class="stack-flex">
+                    <span class="stack-tag">React / Next.js</span>
+                    <span class="stack-tag">Bootstrap</span>
+                    <span class="stack-tag">Node.js</span>
+                    <span class="stack-tag">Express.js</span>
+                    <span class="stack-tag">MySQL</span>
+                    <span class="stack-tag">MongoBD</span>
+                    <span class="stack-tag">Linux</span>
+                    <span class="stack-tag">Docker / DevOps</span>
+                </div>
+            </div>
+
+            <div class="oj-main-hero-wrapper-zone" id="oj-hero-trigger-detector">
+                <a href="./image/CV.jpg" download="CV.jpg" target="_blank" class="oj-hero-download-btn-core">
+                    <span class="oj-hydraulic-progress-bar"></span>
+                    <span class="oj-hero-btn-text-mesh">
+                        DOWNLOAD CV
+                        <svg class="oj-hero-arrow-vector" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15V3M12 15L8 11M12 15L16 11M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </div>
-    </nav>
 
-    
+        <div class="hero-right">
+            <div class="orbiting-circle-track track-outer"></div>
+            <div class="orbiting-circle-track track-inner"></div>
 
-    <section class="hero-section">
-        <div class="hero-grid">
-            
-            <div class="hero-left">
-                <div class="mini-badge">Full-Stack Architecture</div>
-                <h1 class="main-title-block">
-                    I'm Omaan Jallane<br>
-                   <span class="typewriter-rigid-box">
-                    <strong style="color: black;">Build</strong>
-                        <span class="typewriter-inner" id="typewriter-target"></span>
-                    </span>
-                </h1>
-                
-                <p class="hero-description">
-                    I create  <span>fast, secure full-stack websites</span>  and powerful web applications from scratch. I bridge the gap between heavy code functionality and beautiful, clean user design.
-                </p>
+            <div class="floating-glass-bubble bubble-1"></div>
+            <div class="floating-glass-bubble bubble-2"></div>
 
-                <div class="stack-row-wrapper">
-                    <h3 class="stack-row-title">Core Weaponry</h3>
-                    <div class="stack-flex">
-                        <span class="stack-tag">React / Next.js</span>
-                        <span class="stack-tag">Bootstrap</span>
-                        <span class="stack-tag">Node.js</span>
-                        <span class="stack-tag">Express.js</span>
-                        <span class="stack-tag">MySQL</span>
-                        <span class="stack-tag">MongoBD</span>
-                        <span class="stack-tag">Linux</span>
-                        <span class="stack-tag">Docker / DevOps</span>
-                    </div>
+            <div class="frame-visual-box">
+                <div class="img-mask-layer">
+                    <img src="./image/omaan.webp" alt="Omaan Jallane" class="portrait-img">
                 </div>
+            </div>
+        </div>
 
-                  <div class="oj-main-hero-wrapper-zone" id="oj-hero-trigger-detector">
-   <a href="./image/CV.jpg" download="CV.jpg" target="_blank" class="oj-hero-download-btn-core">
-        <span class="oj-hydraulic-progress-bar"></span>
-        <span class="oj-hero-btn-text-mesh">
-            DOWNLOAD CV
-            <svg class="oj-hero-arrow-vector" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 15V3M12 15L8 11M12 15L16 11M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </span>
-    </a>
-</div>
+    </div>
+</section>
 
 <div class="oj-isolated-sticky-sidebar-dock">
-    
     <a href="./image/CV.jpg" download="CV.jpg" class="oj-cyber-node-capsule oj-cv-node-modifier" id="oj-sticky-cv-fab" title="Download CV">
         <div class="oj-node-pulse-mesh"></div>
         <svg class="oj-node-svg-lock" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -804,262 +876,161 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-    /* Desktop Root Wrapper System */
-    .oj-main-hero-wrapper-zone {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: flex-start !important; /* Forces absolute left alignment matching content grids */
-        align-items: center !important;
-        padding: 1.5rem 0 !important;
-        background: transparent !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Core Desktop Premium Button Layout */
-    .oj-hero-download-btn-core {
-        position: relative !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 16px 42px !important;
-        border-radius: 36px !important;
-        background: #111111 !important;
-        border: 2px solid #0ea5e9 !important;
-        cursor: pointer !important;
-        text-decoration: none !important;
-        overflow: hidden !important;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
-        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    }
-
-    .oj-hydraulic-progress-bar {
-        position: absolute !important;
-        top: 0 !important;
-        left: -100% !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.4), rgba(253, 186, 116, 0.4)) !important;
-        z-index: 1 !important;
-    }
-
-    .oj-hero-btn-text-mesh {
-        position: relative !important;
-        z-index: 3 !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-        font-size: 0.85rem !important;
-        font-weight: 900 !important;
-        color: #ffffff !important;
-        letter-spacing: 2px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-    }
-
-    .oj-hero-arrow-vector {
-        width: 18px !important;
-        height: 18px !important;
-        color: #0ea5e9 !important;
-        transition: transform 0.3s ease !important;
-    }
-
-    /* Hover States for Main Module Area */
-    .oj-hero-download-btn-core:hover {
-        background: #000000 !important;
-        border-color: #fdba74 !important;
-        box-shadow: 0 15px 35px rgba(14, 165, 233, 0.3) !important;
-    }
-    .oj-hero-download-btn-core:hover .oj-hydraulic-progress-bar { animation: ojFluidRun 1.6s infinite linear !important; }
-    .oj-hero-download-btn-core:hover .oj-hero-arrow-vector { color: #25D366 !important; animation: ojArrowBounce 0.8s infinite ease-in-out !important; }
-
+    /* DESKTOP CSS STYLES (100% Intact and Untouched) */
+    .hero-section { position: relative; padding: 80px 0; overflow: hidden; }
+    .hero-grid { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 20px; gap: 40px; }
+    .hero-left { flex: 1; }
+    .hero-right { flex: 1; display: flex; justify-content: center; position: relative; }
+    
+    .oj-main-hero-wrapper-zone { width: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 1.5rem 0; background: transparent; box-sizing: border-box; }
+    .oj-hero-download-btn-core { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 16px 42px; border-radius: 36px; background: #111111; border: 2px solid #0ea5e9; cursor: pointer; text-decoration: none; overflow: hidden; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+    .oj-hydraulic-progress-bar { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.4), rgba(253, 186, 116, 0.4)); z-index: 1; }
+    .oj-hero-btn-text-mesh { position: relative; z-index: 3; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; display: inline-flex; align-items: center; gap: 12px; }
+    .oj-hero-arrow-vector { width: 18px; height: 18px; color: #0ea5e9; transition: transform 0.3s ease; }
+    .oj-hero-download-btn-core:hover { background: #000000; border-color: #fdba74; box-shadow: 0 15px 35px rgba(14, 165, 233, 0.3); }
+    .oj-hero-download-btn-core:hover .oj-hydraulic-progress-bar { animation: ojFluidRun 1.6s infinite linear; }
+    .oj-hero-download-btn-core:hover .oj-hero-arrow-vector { color: #25D366; animation: ojArrowBounce 0.8s infinite ease-in-out; }
     @keyframes ojFluidRun { 0% { left: -100%; } 100% { left: 100%; } }
     @keyframes ojArrowBounce { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
 
-     
-    .oj-isolated-sticky-sidebar-dock {
-        position: fixed !important;
-        bottom: 40px !important;
-        right: 40px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 16px !important;
-        z-index: 99999999 !important; /* Layered way above document modules */
-        pointer-events: none !important;
-        box-sizing: border-box !important;
-    }
+    .oj-isolated-sticky-sidebar-dock { position: fixed; bottom: 40px; right: 40px; display: flex; flex-direction: column; gap: 16px; z-index: 99999999; pointer-events: none; box-sizing: border-box; }
+    .oj-cyber-node-capsule { position: relative; width: 56px; height: 56px; max-width: 56px; max-height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 12px 28px rgba(0,0,0,0.45); cursor: pointer; pointer-events: auto; box-sizing: border-box; overflow: hidden; }
+    .oj-node-svg-lock { width: 22px; height: 22px; max-width: 22px; max-height: 22px; z-index: 5; display: block; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+    .oj-cv-node-modifier { background: #111111; border: 2px solid #0ea5e9; color: #0ea5e9; opacity: 0; visibility: hidden; transform: translate(-180px, -220px) scale(0.2) rotate(-90deg); transition: all 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .oj-cv-node-modifier.oj-fly-active-trigger { visibility: visible; opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+    .oj-whatsapp-node-modifier { background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 2px solid rgba(37, 211, 102, 0.35); color: #ffffff; opacity: 1; transform: scale(1); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease; }
+    .oj-green-neon-glow { color: #25D366; filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.8)); }
+    .oj-whatsapp-radar-ping { position: absolute; inset: -2px; border: 2px solid #25D366; border-radius: 50%; opacity: 0; z-index: 1; }
+    .oj-cyber-node-capsule:hover { transform: scale(1.12) translateY(-4px); }
+    .oj-whatsapp-node-modifier:hover { border-color: #25D366; }
+    .oj-whatsapp-node-modifier:hover .oj-whatsapp-radar-ping { animation: ojCyberPingLoop 2s infinite cubic-bezier(0.16, 1, 0.3, 1); }
+    .oj-whatsapp-node-modifier:hover .oj-delayed-ping { animation-delay: 1s; }
+    .oj-node-pulse-mesh { position: absolute; inset: -2px; border-radius: 50%; border: 2px solid #0ea5e9; opacity: 0; }
+    .oj-cv-node-modifier:hover .oj-node-pulse-mesh { animation: ojPulseShock 1.3s infinite ease-out; }
+    .oj-cv-node-modifier:hover .oj-node-svg-lock { color: #25D366; animation: ojArrowBounce 0.8s infinite ease-in-out; }
+    .oj-whatsapp-node-modifier:hover .oj-node-svg-lock { transform: rotate(15deg) scale(1.05); }
 
-     
-    .oj-cyber-node-capsule {
-        position: relative !important;
-        width: 56px !important;   /* Hard Static Cap */
-        height: 56px !important;  /* Hard Static Cap */
-        max-width: 56px !important;
-        max-height: 56px !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-decoration: none !important;
-        box-shadow: 0 12px 28px rgba(0,0,0,0.45) !important;
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important; 
-    }
-
-     
-    .oj-node-svg-lock {
-        width: 22px !important;
-        height: 22px !important;
-        max-width: 22px !important;
-        max-height: 22px !important;
-        z-index: 5 !important;
-        display: block !important;
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    }
-
-     .oj-cv-node-modifier {
-        background: #111111 !important;
-        border: 2px solid #0ea5e9 !important;
-        color: #0ea5e9 !important;
-        
-         
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translate(-180px, -220px) scale(0.2) rotate(-90deg) !important; 
-        transition: all 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Real elastic parabolic swing */
-    }
-
-    /* Triggered Fly State via Scroll Script Engine */
-    .oj-cv-node-modifier.oj-fly-active-trigger {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: translate(0, 0) scale(1) rotate(0deg) !important; /* Smoothly snaps directly on landing spot */
-    }
-
-    /* NODE 2: PREMIUM CYBER GLASS BLACK WHATSAPP CAPSULE */
-    .oj-whatsapp-node-modifier {
-        background: rgba(18, 18, 18, 0.85) !important; /* Dark glass matching premium framework aura */
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border: 2px solid rgba(37, 211, 102, 0.35) !important;
-        color: #ffffff !important;
-        opacity: 1 !important; /* Constantly active on screen core */
-        transform: scale(1) !important;
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease !important;
-    }
-
-    .oj-green-neon-glow {
-        color: #25D366 !important;
-        filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.8)) !important;
-    }
-
-    /* Cyber Radar Rings Layers */
-    .oj-whatsapp-radar-ping {
-        position: absolute !important;
-        inset: -2px !important;
-        border: 2px solid #25D366 !important;
-        border-radius: 50% !important;
-        opacity: 0 !important;
-        z-index: 1 !important;
-    }
-
-    /* Hover Physics Overrides */
-    .oj-cyber-node-capsule:hover {
-        transform: scale(1.12) translateY(-4px) !important;
-    }
-    .oj-whatsapp-node-modifier:hover { border-color: #25D366 !important; }
-    .oj-whatsapp-node-modifier:hover .oj-whatsapp-radar-ping { animation: ojCyberPingLoop 2s infinite cubic-bezier(0.16, 1, 0.3, 1) !important; }
-    .oj-whatsapp-node-modifier:hover .oj-delayed-ping { animation-delay: 1s !important; }
-
-    .oj-node-pulse-mesh {
-        position: absolute !important;
-        inset: -2px !important;
-        border-radius: 50% !important;
-        border: 2px solid #0ea5e9 !important;
-        opacity: 0 !important;
-    }
-    .oj-cv-node-modifier:hover .oj-node-pulse-mesh { animation: ojPulseShock 1.3s infinite ease-out !important; }
-    .oj-cv-node-modifier:hover .oj-node-svg-lock { color: #25D366 !important; animation: ojArrowBounce 0.8s infinite ease-in-out !important; }
-    .oj-whatsapp-node-modifier:hover .oj-node-svg-lock { transform: rotate(15deg) scale(1.05) !important; }
-
-    @keyframes ojCyberPingLoop { 0% { transform: scale(0.95); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
-    @keyframes ojPulseShock { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.35); opacity: 0; } }
-
-     
+    /* MOBILE ENGINE FIXES (Targeted Responsive Settings) */
     @media (max-width: 768px) {
-        /* FIXED: Force absolute center symmetry over hero layouts */
+        .hero-section {
+            padding: 10px 0 !important;
+        }
+        .hero-grid {
+            display: flex !important;
+            flex-direction: column !important; /* Forces layout stacked stream */
+            padding: 0 24px !important;
+            gap: 20px !important;
+        }
+
+        /* 1. IMAGE CONTAINER BOX POSITIONED TOP RIGHT */
+        .hero-right {
+            order: 1 !important; /* Moves section to the absolute top */
+            width: 100% !important;
+            display: flex !important;
+            justify-content: flex-end !important; /* Aligns arch frame on screen right boundary */
+            margin: 0 0 10px 0 !important;
+        }
+
+        /* Clean Emma UI Inspired Parabolic Geometric Arch Frame Shape */
+        .frame-visual-box {
+            width: 240px !important;
+            height: 240px !important;
+            max-width: 240px !important;
+            max-height: 240px !important;
+            border-radius: 0px 0px 0px 120px !important; /* Mathematical smooth arc curve on bottom-left corner */
+            overflow: hidden !important;
+            border: none !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.06) !important;
+            position: relative !important;
+            transform: none !important;
+        }
+
+        /* Strip problematic background vector lines/bubbles crushing layout on smart displays */
+        .orbiting-circle-track, 
+        .floating-glass-bubble {
+            display: none !important;
+        }
+
+        .img-mask-layer, .portrait-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+        }
+
+        /* 2. TEXT TYPOGRAPHY BOX STACKED DIRECTLY BELOW IMAGE ARCH */
+        .hero-left {
+            order: 2 !important; /* Places details section safely right beneath the profile image */
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important; /* Guarantees pure left alignment constraint */
+            text-align: left !important;
+        }
+
+        .mini-badge {
+            margin: 0 0 8px 0 !important;
+            align-self: flex-start !important;
+        }
+
+        .main-title-block {
+            font-size: 2.2rem !important;
+            line-height: 1.25 !important;
+            text-align: left !important;
+            margin: 5px 0 15px 0 !important;
+        }
+        
+        .typewriter-rigid-box {
+            display: inline-flex !important;
+            justify-content: flex-start !important;
+            width: auto !important;
+        }
+
+        .hero-description {
+            font-size: 0.95rem !important;
+            line-height: 1.6 !important;
+            text-align: left !important;
+            margin: 0 0 25px 0 !important;
+        }
+
+        .stack-row-wrapper {
+            width: 100% !important;
+            text-align: left !important;
+        }
+        
+        .stack-row-title {
+            text-align: left !important;
+            margin-bottom: 10px !important;
+        }
+
+        .stack-flex {
+            justify-content: flex-start !important;
+            gap: 8px !important;
+        }
+
         .oj-main-hero-wrapper-zone {
-            justify-content: center !important; /* Perfect Screen Alignment Center Lock */
-            padding: 1rem 0 !important;
+            justify-content: flex-start !important;
+            width: 100% !important;
+            padding: 15px 0 0 0 !important;
         }
 
         .oj-hero-download-btn-core {
-            width: 90% !important; /* Scale dynamically fitting small handheld dimensions */
-            padding: 14px 36px !important;
+            width: 100% !important; /* Linear horizontal button expansion matching text grid width */
+            box-sizing: border-box !important;
         }
 
-        .oj-isolated-sticky-sidebar-dock { bottom: 25px !important; right: 25px !important; gap: 12px !important; }
-        .oj-cyber-node-capsule { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; }
+        /* Floating Utilities adjustments for Handheld layout viewports */
+        .oj-isolated-sticky-sidebar-dock { bottom: 20px !important; right: 20px !important; gap: 12px !important; }
+        .oj-cyber-node-capsule { width: 48px !important; height: 48px !important; }
         .oj-node-svg-lock { width: 18px !important; height: 18px !important; }
-        
-        /* Smooth Mobile Arc Origin Translation values */
         .oj-cv-node-modifier { transform: translate(-60px, -150px) scale(0.3) rotate(-45deg) !important; }
         .oj-cv-node-modifier.oj-fly-active-trigger { transform: translate(0, 0) scale(1) rotate(0deg) !important; }
     }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const trackingZone = document.getElementById('oj-hero-trigger-detector');
-    const animatedFab = document.getElementById('oj-sticky-cv-fab');
-    
-    if (!trackingZone || !animatedFab) return;
-
-    // Secure Observer Framework Architecture
-    const observerMatrixOptions = {
-        root: null,
-        threshold: 0 // Fires instantly when viewport edge cuts node bounds
-    };
-
-    const targetScrollObserver = new IntersectionObserver((layoutEntries) => {
-        layoutEntries.forEach(nodeEntry => {
-            if (!nodeEntry.isIntersecting) {
-                // Large Hero Button left screen bounds entirely -> Fires parabolic fly dynamic class
-                animatedFab.classList.add('oj-fly-active-trigger');
-            } else {
-                // User scrolls backwards back up to top section -> Safely returns back home
-                animatedFab.classList.remove('oj-fly-active-trigger');
-            }
-        });
-    }, observerMatrixOptions);
-
-    targetScrollObserver.observe(trackingZone);
-});
-</script>
-            </div>
-
-            <div class="hero-right">
-                <div class="orbiting-circle-track track-outer"></div>
-                <div class="orbiting-circle-track track-inner"></div>
-
-                <div class="floating-glass-bubble bubble-1"></div>
-                <div class="floating-glass-bubble bubble-2"></div>
-
-                <div class="frame-visual-box">
-                    <div class="img-mask-layer">
-                        <img src="./image/omaan.webp" alt="Omaan Jallane" class="portrait-img">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-     
-
+<section>
     <script>
-        // Structural Logic: Constant Height Typewriter Execution Flow
-        const phrasesDataset = ["Websites.",  "CRM", "ERP ETC."];
+        const phrasesDataset = ["Websites.", "CRM", "ERP ETC."];
         let structuralPhraseLoopIdx = 0;
         let characterTypingIdx = 0;
         let reverseDeleteStepActive = false;
@@ -1067,34 +1038,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function triggerTypewriterEngine() {
             const activePhraseString = phrasesDataset[structuralPhraseLoopIdx];
-            
-            if (reverseDeleteStepActive) {
-                characterTypingIdx--;
-            } else {
-                characterTypingIdx++;
-            }
-
+            if (reverseDeleteStepActive) { characterTypingIdx--; } else { characterTypingIdx++; }
             targetOutputElement.textContent = activePhraseString.substring(0, characterTypingIdx);
-
             let configuredSpeed = reverseDeleteStepActive ? 25 : 55;
-
             if (!reverseDeleteStepActive && characterTypingIdx === activePhraseString.length) {
-                configuredSpeed = 2000; // Freeze at full text length
+                configuredSpeed = 2000;
                 reverseDeleteStepActive = true;
             } else if (reverseDeleteStepActive && characterTypingIdx === 0) {
                 reverseDeleteStepActive = false;
                 structuralPhraseLoopIdx = (structuralPhraseLoopIdx + 1) % phrasesDataset.length;
-                configuredSpeed = 350; // Delay before initiating next string loop
+                configuredSpeed = 350;
             }
-
             setTimeout(triggerTypewriterEngine, configuredSpeed);
         }
-
-        // Initialize engine safely on ready lifecycle
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(triggerTypewriterEngine, 500);
         });
     </script>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const trackingZone = document.getElementById('oj-hero-trigger-detector');
+    const animatedFab = document.getElementById('oj-sticky-cv-fab');
+    if (!trackingZone || !animatedFab) return;
+
+    const observerMatrixOptions = { root: null, threshold: 0 };
+    const targetScrollObserver = new IntersectionObserver((layoutEntries) => {
+        layoutEntries.forEach(nodeEntry => {
+            if (!nodeEntry.isIntersecting) {
+                animatedFab.classList.add('oj-fly-active-trigger');
+            } else {
+                animatedFab.classList.remove('oj-fly-active-trigger');
+            }
+        });
+    }, observerMatrixOptions);
+    targetScrollObserver.observe(trackingZone);
+});
+</script>
 
 
 <!--exericneccccccc-->
@@ -1105,8 +1086,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="matrix-blur-blob blob-2"></div>
     
     <div class="matrix-header">
-        <span class="matrix-subtitle">// CAPABILITIES</span>
-        <h2 class="matrix-title">Experience Matrix & Weapons</h2>
+        <span class="matrix-subtitle"></span>
+        <h2 class="matrix-title">Experience </h2>
     </div>
 
     <div class="matrix-grid">
@@ -1499,8 +1480,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="projects-blueprint-section">
     
     <div class="blueprint-header">
-        <span class="blueprint-subtitle">// PRODUCTION DEPLOYMENTS</span>
-        <h2 class="blueprint-title">Flagship Projects & Blueprints</h2>
+        <span class="blueprint-subtitle"></span>
+        <h2 class="blueprint-title">Projects</h2>
     </div>
 
     <div class="projects-bento-grid">
@@ -1868,7 +1849,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="brand-logosphere-section">
 
     <div class="logosphere-header">
-        <span class="logosphere-subtitle">// INTEGRATION ECOSYSTEM</span>
+        <span class="logosphere-subtitle"></span>
         <h2 class="logosphere-title">Trusted Partner Ecosystem</h2>
     </div>
 
@@ -2817,14 +2798,14 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="footer-core-grid">
         
         <div class="footer-grid-col col-brand-brief">
-            <span class="footer-micro-lbl">// STRUCTURAL INTEGRITY</span>
+            <span class="footer-micro-lbl">STRUCTURAL INTEGRITY</span>
             <p class="footer-brief-txt">
                 I build high-end websites, powerful web applications, and premium user interfaces that look incredible and perform super fast.
             </p>
         </div>
 
         <div class="footer-grid-col col-network-links">
-            <span class="footer-micro-lbl">// LIVE DIRECTORIES</span>
+            <span class="footer-micro-lbl">LIVE DIRECTORIES</span>
             <div class="footer-social-flex">
                 <a href="https://github.com/Elite05-Ur" target="_blank" class="footer-social-anchor">GitHub</a>
                 <a href="https://www.linkedin.com/in/omaan-jallane-45b4a331a/" target="_blank" class="footer-social-anchor">LinkedIn</a>
@@ -2833,7 +2814,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="footer-grid-col col-system-meta">
-            <span class="footer-micro-lbl">// ENGINE STATUS</span>
+            <span class="footer-micro-lbl">ENGINE STATUS</span>
             <div class="system-time-node">
                 <div class="time-active-blink"></div>
                 <span class="time-stamp-val">© 2026 OMAAN. ALL RIGHTS RESERVED.</span>
@@ -2917,7 +2898,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .giant-branding-text {
         font-family: 'Syne', sans-serif;
         font-size: clamp(4.5rem, 15vw, 13.5rem); /* Flawless scalable responsive screen tracker */
-        font-weight: 800;
+        font-weight: 1000;
         text-transform: uppercase;
         letter-spacing: -4px;
         line-height: 0.8;
